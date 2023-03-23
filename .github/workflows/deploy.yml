@@ -25,6 +25,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Empty existing assets
+        run: aws s3 rm s3://chatty-webapp --recursive
+
       - name: Deploy static site to S3 bucket
-        id: deploy
         run: aws s3 sync ./build s3://chatty-webapp
